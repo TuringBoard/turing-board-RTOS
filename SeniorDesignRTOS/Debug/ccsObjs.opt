@@ -1,0 +1,1 @@
+"./LEDThread.obj" "./assemblyFunctions.obj" "./clock.obj" "./gpio.obj" "./helperFunctions.obj" "./kernel.obj" "./main.obj" "./rtos.obj" "./shell.obj" "./svcCalls.obj" "./tm4c123gh6pm_startup_ccs.obj" "./turningMechanismThread.obj" "./uart0.obj" "./uartCommunicationThread.obj" "./wait.obj" "../tm4c123gh6pm.cmd" -llibc.a 
