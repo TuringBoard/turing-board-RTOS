@@ -1376,6 +1376,7 @@ int main(void)
     initUart0();
     initRtos();
     initTurningMechanismThreadHw();
+    initializePwm();
 
     // Setup UART0 baud rate
     setUart0BaudRate(115200, 40e6);
