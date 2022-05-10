@@ -89,9 +89,9 @@ void setPwmDutyCycle(uint8_t mode)
         PWM0_2_CMPA_R = 0; // Light 3 off
         break;
     case 1: // Light 2 on, others off
-        PWM0_1_CMPA_R = 0; // Light 1 off
-        PWM0_1_CMPB_R = 254; // Light 2 on
-        PWM0_2_CMPA_R = 0; // Light 3 off
+        PWM0_1_CMPA_R = 127; // Light 1 off
+        PWM0_1_CMPB_R = 0; // Light 2 on
+        PWM0_2_CMPA_R = 127; // Light 3 off
         break;
     case 2: // Light 2 on, others off
         PWM0_1_CMPA_R = 0; // Light 1 off

@@ -23,6 +23,7 @@
 #include "clock.h"
 #include "svcCalls.h"
 #include "turningMechanismThread.h"
+#include "solenoid.h"
 
 
 // PortF masks
@@ -48,6 +49,9 @@
 turningMechanismData turnMecData;
 uint8_t turnMechDataReceivedFlag = 0;
 uint8_t currentAngle = 50;
+uint8_t motorOnFlag = 0;
+uint8_t angleOffset = 6;
+bool turningMechOnFlag = false;
 
 #define WAIT 55000
 
@@ -138,7 +142,33 @@ void fullStep() {
     waitMicrosecond(30000);
 }
 */
-
+bool turningMechanismIsOn() {
+    return turningMechOnFlag;
+}
+void changeTurningMechanismOnFlag(bool state) {
+    turningMechOnFlag = state;
+}
+bool motorIsOn(){
+    return motorOnFlag == 1;
+}
+void turnOnMotor() {
+    setPinValue(SLEEP, 1);
+    motorOnFlag = 1;
+}
+void turnOffMotor() {
+    setPinValue(SLEEP, 0);
+    motorOnFlag = 0;
+}
+void checkCurrentAngle(uint8_t angle) {
+    if(turningMechanismIsOn()) {
+        if(!getSolenoidState() == 0 && angle < 60 && angle > 40) {
+            disengageSolenoid(); //Pull it out
+        }
+        else if(!getSolenoidState() == 1){
+            engageSolenoid(); //Let it go
+        }
+    }
+}
 void setDirection(uint8_t dir) {
 //    uint8_t direction = (uint8_t)getPinValue(DIR);
 ////    direction ^= 1;
@@ -148,6 +178,127 @@ void setDirection(uint8_t dir) {
 //        direction = 1;
     setPinValue(DIR, dir);
     waitMicrosecond(1);
+}
+void goHome() {
+    int16_t newDirection = currentAngle - 50;
+    uint8_t direction;
+    if(newDirection > 0) {
+        direction = 0;
+    }
+    else {
+        direction = 1;
+    }
+    setDirection(direction);
+    uint8_t angle = 50;
+    uint32_t degrees; //= (angle/ONEEIGHTH);// * 4;
+    if(currentAngle > angle)
+        degrees = currentAngle - angle;
+    else
+        degrees = angle - currentAngle;
+    uint16_t temp = currentAngle;
+    degrees = (degrees/FULLSTEP) * 4;
+    if(getSolenoidState() == 1) {
+        disengageSolenoid();
+        waitMicrosecond(2000);
+    }
+    uint8_t counter = 0;
+    uint16_t i;
+    for(i = 0; i < degrees; i++) {
+        microStep();
+        counter++;
+        if(counter == 2) {
+            if(direction == 1)
+                temp++;
+            else
+                temp--;
+            counter = 0;
+        }
+        checkCurrentAngle(temp);
+        yield();
+    }
+    if(getSolenoidState() == 0)
+        engageSolenoid();
+    currentAngle = 50;
+}
+void goHomePlusOne() {
+    int16_t directionAngle = currentAngle - 50;
+    uint8_t direction;
+    if(directionAngle > 0) {
+        direction = 0;
+    }
+    else {
+        direction = 1;
+    }
+    setDirection(direction);
+    uint8_t angle = 50;
+    uint32_t degrees; //= (angle/ONEEIGHTH);// * 4;
+    if(currentAngle > angle)
+        degrees = currentAngle - angle;
+    else
+        degrees = angle - currentAngle;
+    degrees = (degrees/FULLSTEP) * 4;
+    degrees += angleOffset;
+    uint16_t i;
+    for(i = 0; i < degrees; i++) {
+        microStep();
+        yield();
+    }
+    currentAngle = 50;
+}
+void moveMotor() {
+    setDirection(1);
+    uint8_t angle = 50;
+    uint32_t degrees; //= (angle/ONEEIGHTH);// * 4;
+    if(currentAngle > angle)
+        degrees = currentAngle - angle;
+    else
+    degrees = angleOffset;
+    degrees = (degrees/FULLSTEP) * 4;
+    uint16_t i;
+    for(i = 0; i < degrees; i++) {
+        microStep();
+        yield();
+    }
+    currentAngle = 50 + angleOffset;
+//    currentAngle = 50 - degrees;
+}
+
+void turn(uint8_t dir) {
+    setDirection(dir);
+    uint8_t angle = turnMecData.angle;
+    uint32_t degrees; //= (angle/ONEEIGHTH);// * 4;
+    if(currentAngle > angle) //going right
+        degrees = currentAngle - angle;
+    else //going left
+        degrees = angle - currentAngle;
+    uint16_t temp = currentAngle;
+//    if(dir == 0)
+//        degrees += angleOffset;
+    degrees = (degrees/FULLSTEP) * 4;
+    if(getSolenoidState() == 1) {
+        disengageSolenoid();
+        waitMicrosecond(2000);
+    }
+    uint8_t counter = 0;
+    uint16_t i;
+    for(i = 0; i < degrees; i++) {
+        microStep();
+        counter++;
+        if(counter == 2) {
+            if(dir == 1)
+                temp++;
+            else
+                temp--;
+            counter = 0;
+        }
+        checkCurrentAngle(temp);
+        yield();
+    }
+    if(getSolenoidState() == 0)
+        engageSolenoid();
+//    if(dir == 0)
+//        angle += angleOffset;
+    currentAngle = angle;
 }
 void turningMechanism() {
     while(1) {
@@ -162,223 +313,34 @@ void turningMechanism() {
 //            setPinValue(PORTF,1,1);
 //            waitMicrosecond(200000);
 //            setPinValue(PORTF,1,0);
-            setPinValue(SLEEP, 1);
+//            setPinValue(SLEEP, 1);
             //1 - right
             //0 - left
             uint8_t dir = turnMecData.direction;
-            if(dir == 1 || dir == 0) {
-                setDirection(dir);
-                uint8_t angle = turnMecData.angle;
-                uint32_t degrees; //= (angle/ONEEIGHTH);// * 4;
-                if(currentAngle > angle)
-                    degrees = currentAngle - angle;
-                else
-                    degrees = angle - currentAngle;
-                degrees = (degrees/FULLSTEP) * 4;
-                uint16_t i;
-                for(i = 0; i < degrees; i++) {
-                    microStep();
-                    yield();
-                }
-                currentAngle = angle;
+            uint8_t solenoidF = turnMecData.solenoidFlag;
+            if((dir == 1 || dir == 0) && solenoidF == 0 && motorIsOn()) {
+                turn(dir);
             }
-            else if(dir == 2) {
-                int16_t newDirection = currentAngle - 50;
-                uint8_t direction;
-                if(newDirection > 0) {
-                    direction = 0;
-                }
-                else {
-                    direction = 1;
-                }
-                setDirection(direction);
-                uint8_t angle = 50;
-                uint32_t degrees; //= (angle/ONEEIGHTH);// * 4;
-                if(currentAngle > angle)
-                    degrees = currentAngle - angle;
-                else
-                    degrees = angle - currentAngle;
-                degrees = (degrees/FULLSTEP) * 4;
-                uint16_t i;
-                for(i = 0; i < degrees; i++) {
-                    microStep();
-                    yield();
-                }
-                currentAngle = 50;
+            else if(dir == 2 && solenoidF == 0 && motorIsOn()) {
+                goHome();
+            }
+            else if(dir == 3 && solenoidF == 1) {
+                engageSolenoid(); //Let it go
+                waitMicrosecond(20000);
+                goHomePlusOne();
+                turnOffMotor();
+            }
+            else if(dir == 3 && solenoidF == 0) {
+                disengageSolenoid();
+                changeTurningMechanismOnFlag(true);
+                waitMicrosecond(20000);
+                turnOnMotor();
+//                moveMotor();
+//                engageSolenoid();
             }
             turnMechDataReceivedFlag = 0;
-            setPinValue(SLEEP, 0);
+//            setPinValue(SLEEP, 0);
         }
         yield();
     }
 }
-/*
-void turningMechanism() {
-    uint8_t value = 1;
-
-    while(1) {
-        //1/8
-        uint8_t i;
-        for(i = 0; i < 800; i++) {
-            microStep();
-            yield();
-        }
-        waitMicrosecond(5000); //15000
-        value ^= 1;
-        setPinValue(DIR, value);
-        for(i = 0; i < 800; i++){
-            microStep();
-            yield();
-        }
-    }
-
-    setStepFormat(4);
-    uint32_t i = 0;
-    while(1){
-        value ^= 1;
-        setPinValue(DIR, value);
-        for(i = 0; i < 42000; i++) {
-            microStep();
-        }
-        waitMicrosecond(1000000); //15000
-        value ^= 1;
-        setPinValue(DIR, value);
-        for(i = 0; i < 4200; i++){
-            microStep();
-        }
-    }
-
-}
-*/
-//-----------------------------------------------------------------------------
-// Main
-//-----------------------------------------------------------------------------
-
-//int main(void) {
-//    // Initialize hardware
-//    initHw();
-//    initUart0();
-//    setUart0BaudRate(115200, 40e6);
-//
-////    setStepFormat(0);
-//
-//    /*
-//    setPinValue(DIR, 1); //right
-//
-//    while(1) {
-//        uint8_t j = 0;
-//        for(j = 0; j < 200; j++){
-//            microStep();
-//        }
-//        waitMicrosecond(2000000); //15000
-//        setPinValue(DIR, 0); //left
-//        j = 0;
-//        for(j = 0; j < 200; j++){
-//            microStep();
-//        }
-//        waitMicrosecond(2000000); //15000
-//        setPinValue(DIR, 1);
-//    }
-//    */
-//
-////    while(true) {
-////        putcUart0(70);
-////        putcUart0(71);
-////        waitMicrosecond(500000);
-////    }
-//    /*
-//    while(true) {
-//        if(kbhitUart0()) {
-//            uint8_t distance = (uint8_t)getcUart0();
-//            uint8_t direction = (uint8_t)getcUart0();
-//            putcUart0(70);
-//            putcUart0(71);
-//            if(distance == 70 || direction == 71) {
-//                setPinValue(RED_LED, 1);
-//                waitMicrosecond(1000000);
-//                setPinValue(RED_LED, 0);
-//            }
-//            setPinValue(GREEN_LED, 1);
-//            waitMicrosecond(2000000);
-//            setPinValue(GREEN_LED, 0);
-////            setPinValue(DIR, direction);
-////            uint8_t i = 0;
-////            double dist = distance;
-////            for(i = 0; i < (int)dist; i++) {
-////                microStep();
-////            }
-//        }
-//    }
-//    /*
-//    // set up step format
-//    setStepFormat(4);
-//    waitMicrosecond(10000);
-//    setPinValue(DIR, 1);
-//    waitMicrosecond(1);
-////    shellFunction();
-//
-//    uint32_t count = 0;
-//    while(true) {
-//        microStep();
-//        if(getPinValue(PUSH_BUTTON) == 0) {
-//            waitMicrosecond(180000); //15000
-//            changeDirection();
-//        }
-//        count++;
-//    }
-// */
-//    /*
-//    //1/16
-//    setStepFormat(4);
-//    uint32_t i = 0;
-//    while(1){
-//        for(i = 0; i < 3200; i++) {
-//            microStep();
-//        }
-//        waitMicrosecond(500000); //15000
-//        changeDirection();
-//        for(i = 0; i < 3200; i++){
-//            microStep();
-//        }
-//    }
-//
-//*/
-//   //1/8
-//
-//    setStepFormat(3);
-//    uint8_t value = 1;
-//    setPinValue(DIR, value);
-//    uint32_t i = 0;
-//    while(1){
-//        for(i = 0; i < 800; i++) {
-//            microStep();
-//        }
-//        waitMicrosecond(500000); //15000
-//        value ^= 1;
-//        setPinValue(DIR, value);
-//        for(i = 0; i < 800; i++){
-//            microStep();
-//        }
-//    }
-//
-////    uint16_t i = 0;
-////    setPinValue(DIR, 1);
-////    for(i = 0; i < 6400; i++) {
-////        microStep();
-////    }
-////    i = 0;
-////    waitMicrosecond(160000);
-////    setPinValue(DIR, 0);
-////    for(i = 0; i < 12800; i++) {
-////        microStep();
-////    }
-////    i = 0;
-////    waitMicrosecond(160000);
-////    setPinValue(DIR, 1);
-////    for(i = 0; i < 6400; i++) {
-////        microStep();
-////    }
-//
-//    while(1);
-//
-//}

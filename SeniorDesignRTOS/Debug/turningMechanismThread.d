@@ -21,6 +21,7 @@ turningMechanismThread.obj: ../wait.h
 turningMechanismThread.obj: ../clock.h
 turningMechanismThread.obj: ../svcCalls.h
 turningMechanismThread.obj: ../turningMechanismThread.h
+turningMechanismThread.obj: ../solenoid.h
 
 ../turningMechanismThread.c: 
 /Applications/ti/ccs1020/ccs/tools/compiler/ti-cgt-arm_20.2.2.LTS/include/stdint.h: 
@@ -43,3 +44,4 @@ turningMechanismThread.obj: ../turningMechanismThread.h
 ../clock.h: 
 ../svcCalls.h: 
 ../turningMechanismThread.h: 
+../solenoid.h: 

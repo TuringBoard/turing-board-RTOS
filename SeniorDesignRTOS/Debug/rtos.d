@@ -24,6 +24,7 @@ rtos.obj: ../shell.h
 rtos.obj: ../svcCalls.h
 rtos.obj: ../turningMechanismThread.h
 rtos.obj: ../LEDThread.h
+rtos.obj: ../solenoid.h
 
 ../rtos.c: 
 /Applications/ti/ccs1020/ccs/tools/compiler/ti-cgt-arm_20.2.2.LTS/include/stdint.h: 
@@ -49,3 +50,4 @@ rtos.obj: ../LEDThread.h
 ../svcCalls.h: 
 ../turningMechanismThread.h: 
 ../LEDThread.h: 
+../solenoid.h: 

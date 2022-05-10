@@ -33,7 +33,7 @@ void uartReceiveInput() {
             turnMecData.id = ID;
             turnMecData.angle = data[1];
             turnMecData.direction = data[2];
-            turnMecData.rate = data[3];
+            turnMecData.solenoidFlag = data[3];
             turnMechDataReceivedFlag = 1;
             break;
         case LT:
@@ -61,7 +61,7 @@ void uartSendOutput(){
         putcUart0(turnMecData.id + 1);
         putcUart0(turnMecData.direction + 1);
         putcUart0(turnMecData.angle + 1);
-        putcUart0(turnMecData.rate + 1);
+        putcUart0(turnMecData.solenoidFlag + 1);
         sendTurnMechDataFlag = 0;
     }
     sendUartFlag = 0;

@@ -56,6 +56,7 @@
 #include "svcCalls.h"
 #include "turningMechanismThread.h"
 #include "LEDThread.h"
+#include "solenoid.h"
 
 //assembly functions definitions
 extern void yieldSvcCall();
@@ -1377,6 +1378,7 @@ int main(void)
     initRtos();
     initTurningMechanismThreadHw();
     initializePwm();
+    initSolenoidHw();
 
     // Setup UART0 baud rate
     setUart0BaudRate(115200, 40e6);

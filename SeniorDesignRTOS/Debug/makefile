@@ -17,6 +17,7 @@ ORDERED_OBJS += \
 "./main.obj" \
 "./rtos.obj" \
 "./shell.obj" \
+"./solenoid.obj" \
 "./svcCalls.obj" \
 "./tm4c123gh6pm_startup_ccs.obj" \
 "./turningMechanismThread.obj" \
@@ -166,8 +167,8 @@ SeniorDesignRTOS.hex: $(EXE_OUTPUTS)
 # Other Targets
 clean:
 	-$(RM) $(BIN_OUTPUTS__QUOTED)$(EXE_OUTPUTS__QUOTED)
-	-$(RM) "LEDThread.obj" "assemblyFunctions.obj" "clock.obj" "gpio.obj" "helperFunctions.obj" "kernel.obj" "main.obj" "rtos.obj" "shell.obj" "svcCalls.obj" "tm4c123gh6pm_startup_ccs.obj" "turningMechanismThread.obj" "uart0.obj" "uartCommunicationThread.obj" "wait.obj" 
-	-$(RM) "LEDThread.d" "clock.d" "gpio.d" "helperFunctions.d" "kernel.d" "main.d" "rtos.d" "shell.d" "svcCalls.d" "tm4c123gh6pm_startup_ccs.d" "turningMechanismThread.d" "uart0.d" "uartCommunicationThread.d" "wait.d" 
+	-$(RM) "LEDThread.obj" "assemblyFunctions.obj" "clock.obj" "gpio.obj" "helperFunctions.obj" "kernel.obj" "main.obj" "rtos.obj" "shell.obj" "solenoid.obj" "svcCalls.obj" "tm4c123gh6pm_startup_ccs.obj" "turningMechanismThread.obj" "uart0.obj" "uartCommunicationThread.obj" "wait.obj" 
+	-$(RM) "LEDThread.d" "clock.d" "gpio.d" "helperFunctions.d" "kernel.d" "main.d" "rtos.d" "shell.d" "solenoid.d" "svcCalls.d" "tm4c123gh6pm_startup_ccs.d" "turningMechanismThread.d" "uart0.d" "uartCommunicationThread.d" "wait.d" 
 	-$(RM) "assemblyFunctions.d" 
 	-@echo 'Finished clean'
 	-@echo ' '
