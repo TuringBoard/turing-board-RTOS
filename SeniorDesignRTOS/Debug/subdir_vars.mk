@@ -18,6 +18,7 @@ C_SRCS += \
 ../main.c \
 ../rtos.c \
 ../shell.c \
+../solenoid.c \
 ../svcCalls.c \
 ../tm4c123gh6pm_startup_ccs.c \
 ../turningMechanismThread.c \
@@ -37,6 +38,7 @@ C_DEPS += \
 ./main.d \
 ./rtos.d \
 ./shell.d \
+./solenoid.d \
 ./svcCalls.d \
 ./tm4c123gh6pm_startup_ccs.d \
 ./turningMechanismThread.d \
@@ -54,6 +56,7 @@ OBJS += \
 ./main.obj \
 ./rtos.obj \
 ./shell.obj \
+./solenoid.obj \
 ./svcCalls.obj \
 ./tm4c123gh6pm_startup_ccs.obj \
 ./turningMechanismThread.obj \
@@ -71,6 +74,7 @@ OBJS__QUOTED += \
 "main.obj" \
 "rtos.obj" \
 "shell.obj" \
+"solenoid.obj" \
 "svcCalls.obj" \
 "tm4c123gh6pm_startup_ccs.obj" \
 "turningMechanismThread.obj" \
@@ -87,6 +91,7 @@ C_DEPS__QUOTED += \
 "main.d" \
 "rtos.d" \
 "shell.d" \
+"solenoid.d" \
 "svcCalls.d" \
 "tm4c123gh6pm_startup_ccs.d" \
 "turningMechanismThread.d" \
@@ -106,6 +111,7 @@ C_SRCS__QUOTED += \
 "../main.c" \
 "../rtos.c" \
 "../shell.c" \
+"../solenoid.c" \
 "../svcCalls.c" \
 "../tm4c123gh6pm_startup_ccs.c" \
 "../turningMechanismThread.c" \

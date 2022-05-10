@@ -1,36 +1,36 @@
 ******************************************************************************
                   TI ARM Linker Unix v20.2.2                   
 ******************************************************************************
->> Linked Sat Apr  2 14:34:28 2022
+>> Linked Wed May  4 15:17:25 2022
 
 OUTPUT FILE NAME:   <SeniorDesignRTOS.out>
-ENTRY POINT SYMBOL: "_c_int00_noargs"  address: 00003ecd
+ENTRY POINT SYMBOL: "_c_int00_noargs"  address: 00004249
 
 
 MEMORY CONFIGURATION
 
          name            origin    length      used     unused   attr    fill
 ----------------------  --------  ---------  --------  --------  ----  --------
-  FLASH                 00000000   00040000  0000403e  0003bfc2  R  X
+  FLASH                 00000000   00040000  000043ba  0003bc46  R  X
   SRAM                  20000000   00001400  00000535  00000ecb  RW X
-  GLOB                  20007c00   00000400  0000000c  000003f4  RW X
+  GLOB                  20007c00   00000400  00000010  000003f0  RW X
 
 
 SEGMENT ALLOCATION MAP
 
 run origin  load origin   length   init length attrs members
 ----------  ----------- ---------- ----------- ----- -------
-00000000    00000000    00004040   00004040    r-x
+00000000    00000000    000043c0   000043c0    r-x
   00000000    00000000    0000026c   0000026c    r-- .intvecs
-  0000026c    0000026c    00003d52   00003d52    r-x .text
-  00003fbe    00003fbe    00000030   00000030    r-- .const
-  00003ff0    00003ff0    00000050   00000050    r-- .cinit
+  0000026c    0000026c    000040ce   000040ce    r-x .text
+  0000433a    0000433a    00000030   00000030    r-- .const
+  00004370    00004370    00000050   00000050    r-- .cinit
 20000000    20000000    0000053c   00000000    rw-
   20000000    20000000    00000321   00000000    rw- .bss
   20000328    20000328    00000200   00000000    rw- .stack
   20000528    20000528    00000014   00000000    rw- .data
-20007c00    20007c00    0000000c   00000000    rw-
-  20007c00    20007c00    0000000c   00000000    rw- .tbglob
+20007c00    20007c00    00000010   00000000    rw-
+  20007c00    20007c00    00000010   00000000    rw- .tbglob
 
 
 SECTION ALLOCATION MAP
@@ -41,49 +41,50 @@ section   page    origin      length       input sections
 .intvecs   0    00000000    0000026c     
                   00000000    0000026c     tm4c123gh6pm_startup_ccs.obj (.intvecs)
 
-.text      0    0000026c    00003d52     
+.text      0    0000026c    000040ce     
                   0000026c    00001b8c     rtos.obj (.text)
                   00001df8    000007c0     gpio.obj (.text)
-                  000025b8    000006a8     helperFunctions.obj (.text)
-                  00002c60    000003ac     turningMechanismThread.obj (.text)
-                  0000300c    0000037a     shell.obj (.text)
-                  00003386    00000002     --HOLE-- [fill = 0]
-                  00003388    00000204     kernel.obj (.text)
-                  0000358c    00000200     LEDThread.obj (.text)
-                  0000378c    00000180     uart0.obj (.text)
-                  0000390c    0000016c     uartCommunicationThread.obj (.text)
-                  00003a78    00000136     rtsv7M4_T_le_v4SPD16_eabi.lib : fd_div_t2.asm.obj (.text)
-                  00003bae    000000fc                                   : fd_mul_t2.asm.obj (.text)
-                  00003caa    0000009c                                   : memcpy_t2.asm.obj (.text)
-                  00003d46    00000094     assemblyFunctions.obj (.text)
-                  00003dda    00000068     rtsv7M4_T_le_v4SPD16_eabi.lib : copy_decompress_lzss.c.obj (.text:decompress:lzss:__TI_decompress_lzss)
-                  00003e42    00000002     --HOLE-- [fill = 0]
-                  00003e44    00000044                                   : autoinit.c.obj (.text:__TI_auto_init_nobinit_nopinit:__TI_auto_init_nobinit_nopinit)
-                  00003e88    00000044                                   : fd_tou_t2.asm.obj (.text)
-                  00003ecc    00000034                                   : boot_cortex_m.c.obj (.text:_c_int00_noargs:_c_int00_noargs)
-                  00003f00    0000002c     svcCalls.obj (.text)
-                  00003f2c    00000024     wait.obj (.text)
-                  00003f50    00000020     rtsv7M4_T_le_v4SPD16_eabi.lib : u_tofd_t2.asm.obj (.text)
-                  00003f70    0000001c                                   : copy_zero_init.c.obj (.text:decompress:ZI:__TI_zero_init_nomemset:__TI_zero_init_nomemset)
-                  00003f8c    00000010     clock.obj (.text)
-                  00003f9c    0000000e     rtsv7M4_T_le_v4SPD16_eabi.lib : copy_decompress_none.c.obj (.text:decompress:none:__TI_decompress_none)
-                  00003faa    0000000c     tm4c123gh6pm_startup_ccs.obj (.text)
-                  00003fb6    00000004     rtsv7M4_T_le_v4SPD16_eabi.lib : pre_init.c.obj (.text:_system_pre_init)
-                  00003fba    00000004                                   : exit.c.obj (.text:abort:abort)
+                  000025b8    000006dc     turningMechanismThread.obj (.text)
+                  00002c94    000006a8     helperFunctions.obj (.text)
+                  0000333c    0000037a     shell.obj (.text)
+                  000036b6    00000002     --HOLE-- [fill = 0]
+                  000036b8    00000204     kernel.obj (.text)
+                  000038bc    00000200     LEDThread.obj (.text)
+                  00003abc    00000180     uart0.obj (.text)
+                  00003c3c    0000016c     uartCommunicationThread.obj (.text)
+                  00003da8    00000136     rtsv7M4_T_le_v4SPD16_eabi.lib : fd_div_t2.asm.obj (.text)
+                  00003ede    000000fc                                   : fd_mul_t2.asm.obj (.text)
+                  00003fda    0000009c                                   : memcpy_t2.asm.obj (.text)
+                  00004076    00000094     assemblyFunctions.obj (.text)
+                  0000410a    00000068     rtsv7M4_T_le_v4SPD16_eabi.lib : copy_decompress_lzss.c.obj (.text:decompress:lzss:__TI_decompress_lzss)
+                  00004172    00000002     --HOLE-- [fill = 0]
+                  00004174    0000004c     solenoid.obj (.text)
+                  000041c0    00000044     rtsv7M4_T_le_v4SPD16_eabi.lib : autoinit.c.obj (.text:__TI_auto_init_nobinit_nopinit:__TI_auto_init_nobinit_nopinit)
+                  00004204    00000044                                   : fd_tou_t2.asm.obj (.text)
+                  00004248    00000034                                   : boot_cortex_m.c.obj (.text:_c_int00_noargs:_c_int00_noargs)
+                  0000427c    0000002c     svcCalls.obj (.text)
+                  000042a8    00000024     wait.obj (.text)
+                  000042cc    00000020     rtsv7M4_T_le_v4SPD16_eabi.lib : u_tofd_t2.asm.obj (.text)
+                  000042ec    0000001c                                   : copy_zero_init.c.obj (.text:decompress:ZI:__TI_zero_init_nomemset:__TI_zero_init_nomemset)
+                  00004308    00000010     clock.obj (.text)
+                  00004318    0000000e     rtsv7M4_T_le_v4SPD16_eabi.lib : copy_decompress_none.c.obj (.text:decompress:none:__TI_decompress_none)
+                  00004326    0000000c     tm4c123gh6pm_startup_ccs.obj (.text)
+                  00004332    00000004     rtsv7M4_T_le_v4SPD16_eabi.lib : pre_init.c.obj (.text:_system_pre_init)
+                  00004336    00000004                                   : exit.c.obj (.text:abort:abort)
 
-.const     0    00003fbe    00000030     
-                  00003fbe    00000010     helperFunctions.obj (.const:.string:$P$T0$1)
-                  00003fce    00000010     helperFunctions.obj (.const:.string:$P$T1$2)
-                  00003fde    00000010     helperFunctions.obj (.const:.string:$P$T2$3)
+.const     0    0000433a    00000030     
+                  0000433a    00000010     helperFunctions.obj (.const:.string:$P$T0$1)
+                  0000434a    00000010     helperFunctions.obj (.const:.string:$P$T1$2)
+                  0000435a    00000010     helperFunctions.obj (.const:.string:$P$T2$3)
 
-.cinit     0    00003ff0    00000050     
-                  00003ff0    00000015     (.cinit..data.load) [load image, compression = lzss]
-                  00004005    00000003     --HOLE-- [fill = 0]
-                  00004008    0000000c     (__TI_handler_table)
-                  00004014    0000000a     (.cinit..tbglob.load) [load image, compression = lzss]
-                  0000401e    00000002     --HOLE-- [fill = 0]
-                  00004020    00000008     (.cinit..bss.load) [load image, compression = zero_init]
-                  00004028    00000018     (__TI_cinit_table)
+.cinit     0    00004370    00000050     
+                  00004370    00000015     (.cinit..data.load) [load image, compression = lzss]
+                  00004385    00000003     --HOLE-- [fill = 0]
+                  00004388    0000000c     (__TI_handler_table)
+                  00004394    0000000b     (.cinit..tbglob.load) [load image, compression = lzss]
+                  0000439f    00000001     --HOLE-- [fill = 0]
+                  000043a0    00000008     (.cinit..bss.load) [load image, compression = zero_init]
+                  000043a8    00000018     (__TI_cinit_table)
 
 .init_array 
 *          0    00000000    00000000     UNINITIALIZED
@@ -102,12 +103,13 @@ section   page    origin      length       input sections
                   20000328    00000004     rtsv7M4_T_le_v4SPD16_eabi.lib : boot_cortex_m.c.obj (.stack)
                   2000032c    000001fc     --HOLE--
 
-.tbglob    0    20007c00    0000000c     UNINITIALIZED
-                  20007c00    00000004     turningMechanismThread.obj (.tbglob:uninit)
-                  20007c04    00000003     uartCommunicationThread.obj (.tbglob)
-                  20007c07    00000002     turningMechanismThread.obj (.tbglob:init)
-                  20007c09    00000002     LEDThread.obj (.tbglob:uninit)
-                  20007c0b    00000001     LEDThread.obj (.tbglob:init)
+.tbglob    0    20007c00    00000010     UNINITIALIZED
+                  20007c00    00000005     turningMechanismThread.obj (.tbglob:init)
+                  20007c05    00000004     turningMechanismThread.obj (.tbglob:uninit)
+                  20007c09    00000003     uartCommunicationThread.obj (.tbglob)
+                  20007c0c    00000002     LEDThread.obj (.tbglob:uninit)
+                  20007c0e    00000001     LEDThread.obj (.tbglob:init)
+                  20007c0f    00000001     solenoid.obj (.tbglob)
 
 __llvm_prf_cnts 
 *          0    20000000    00000000     UNINITIALIZED
@@ -119,8 +121,8 @@ MODULE SUMMARY
     ./
        rtos.obj                       7052    0         821    
        gpio.obj                       1984    0         0      
+       turningMechanismThread.obj     1756    0         9      
        helperFunctions.obj            1704    48        0      
-       turningMechanismThread.obj     940     0         6      
        shell.obj                      890     0         0      
        tm4c123gh6pm_startup_ccs.obj   12      620       0      
        kernel.obj                     516     0         0      
@@ -128,11 +130,12 @@ MODULE SUMMARY
        uart0.obj                      384     0         0      
        uartCommunicationThread.obj    364     0         3      
        assemblyFunctions.obj          148     0         0      
+       solenoid.obj                   76      0         1      
        svcCalls.obj                   44      0         0      
        wait.obj                       36      0         0      
        clock.obj                      16      0         0      
     +--+------------------------------+-------+---------+---------+
-       Total:                         14602   668       833    
+       Total:                         15494   668       837    
                                                                
     /Applications/ti/ccs1020/ccs/tools/compiler/ti-cgt-arm_20.2.2.LTS/lib/rtsv7M4_T_le_v4SPD16_eabi.lib
        fd_div_t2.asm.obj              310     0         0      
@@ -151,22 +154,22 @@ MODULE SUMMARY
        Total:                         1092    0         0      
                                                                
        Stack:                         0       0         512    
-       Linker Generated:              0       75        0      
+       Linker Generated:              0       76        0      
     +--+------------------------------+-------+---------+---------+
-       Grand Total:                   15694   743       1345   
+       Grand Total:                   16586   744       1349   
 
 
 LINKER GENERATED COPY TABLES
 
-__TI_cinit_table @ 00004028 records: 3, size/record: 8, table size: 24
-	.data: load addr=00003ff0, load size=00000015 bytes, run addr=20000528, run size=00000014 bytes, compression=lzss
-	.tbglob: load addr=00004014, load size=0000000a bytes, run addr=20007c00, run size=0000000c bytes, compression=lzss
-	.bss: load addr=00004020, load size=00000008 bytes, run addr=20000000, run size=00000321 bytes, compression=zero_init
+__TI_cinit_table @ 000043a8 records: 3, size/record: 8, table size: 24
+	.data: load addr=00004370, load size=00000015 bytes, run addr=20000528, run size=00000014 bytes, compression=lzss
+	.tbglob: load addr=00004394, load size=0000000b bytes, run addr=20007c00, run size=00000010 bytes, compression=lzss
+	.bss: load addr=000043a0, load size=00000008 bytes, run addr=20000000, run size=00000321 bytes, compression=zero_init
 
 
 LINKER GENERATED HANDLER TABLE
 
-__TI_handler_table @ 00004008 records: 3, size/record: 4, table size: 12
+__TI_handler_table @ 00004388 records: 3, size/record: 4, table size: 12
 	index: 0, handler: __TI_decompress_lzss
 	index: 1, handler: __TI_decompress_none
 	index: 2, handler: __TI_zero_init
@@ -176,137 +179,149 @@ GLOBAL SYMBOLS: SORTED ALPHABETICALLY BY Name
 
 address   name                          
 -------   ----                          
-00003fbb  C$$EXIT                       
-00003fab  ResetISR                      
+00004337  C$$EXIT                       
+00004327  ResetISR                      
 20000528  __STACK_END                   
 00000200  __STACK_SIZE                  
 20000528  __STACK_TOP                   
-00004028  __TI_CINIT_Base               
-00004040  __TI_CINIT_Limit              
-00004008  __TI_Handler_Table_Base       
-00004014  __TI_Handler_Table_Limit      
-00003e45  __TI_auto_init_nobinit_nopinit
-00003ddb  __TI_decompress_lzss          
-00003f9d  __TI_decompress_none          
+000043a8  __TI_CINIT_Base               
+000043c0  __TI_CINIT_Limit              
+00004388  __TI_Handler_Table_Base       
+00004394  __TI_Handler_Table_Limit      
+000041c1  __TI_auto_init_nobinit_nopinit
+0000410b  __TI_decompress_lzss          
+00004319  __TI_decompress_none          
 ffffffff  __TI_pprof_out_hndl           
 ffffffff  __TI_prof_data_size           
 ffffffff  __TI_prof_data_start          
 00000000  __TI_static_base__            
-00003f71  __TI_zero_init_nomemset       
-00003e89  __aeabi_d2uiz                 
-00003a79  __aeabi_ddiv                  
-00003baf  __aeabi_dmul                  
-00003cab  __aeabi_memcpy                
-00003cab  __aeabi_memcpy4               
-00003cab  __aeabi_memcpy8               
-00003f51  __aeabi_ui2d                  
+000042ed  __TI_zero_init_nomemset       
+00004205  __aeabi_d2uiz                 
+00003da9  __aeabi_ddiv                  
+00003edf  __aeabi_dmul                  
+00003fdb  __aeabi_memcpy                
+00003fdb  __aeabi_memcpy4               
+00003fdb  __aeabi_memcpy8               
+000042cd  __aeabi_ui2d                  
 ffffffff  __binit__                     
 ffffffff  __c_args__                    
 UNDEFED   __mpu_init                    
 20000328  __stack                       
 20000000  __start___llvm_prf_cnts       
 20000000  __stop___llvm_prf_cnts        
-00003ecd  _c_int00_noargs               
+00004249  _c_int00_noargs               
 UNDEFED   _system_post_cinit            
-00003fb7  _system_pre_init              
-00003fbb  abort                         
+00004333  _system_pre_init              
+00004337  abort                         
+20007c03  angleOffset                   
 ffffffff  binit                         
 0000145d  busFaultIsr                   
 00001b27  callDestroyThread             
 00001b1b  callRestartThread             
-000033eb  clearMPUFaultBit              
+0000279d  changeTurningMechanismOnFlag  
+000027ef  checkCurrentAngle             
+0000371b  clearMPUFaultBit              
 000008b7  createSemaphore               
 00000491  createThread                  
-20007c08  currentAngle                  
+20007c01  currentAngle                  
 00001c0d  debounce                      
 000007a5  destroyThread                 
 00002429  disablePinInterrupt           
 00002161  disablePinPulldown            
 00002119  disablePinPullup              
 00001eb5  disablePort                   
-0000351d  disableSubRegion              
-000033d3  enableBusFaultIsr             
-00003403  enableMPU                     
-000033c7  enableMPUIsr                  
+0000384d  disableSubRegion              
+0000419f  disengageSolenoid             
+00003703  enableBusFaultIsr             
+00003733  enableMPU                     
+000036f7  enableMPUIsr                  
 00002405  enablePinInterrupt            
 0000213d  enablePinPulldown             
 000020eb  enablePinPullup               
 00001df9  enablePort                    
-000033df  enableUsageFaultIsr           
+0000370f  enableUsageFaultIsr           
+0000418b  engageSolenoid                
 00001c63  errant                        
 00001a25  flash4Hz                      
 00000000  g_pfnVectors                  
-000032a1  getFieldInteger               
-0000326f  getFieldString                
+000035d1  getFieldInteger               
+0000359f  getFieldString                
 0000163f  getIpcsData                   
-0000339d  getMSP                        
-00003397  getPSP                        
+000036cd  getMSP                        
+000036c7  getPSP                        
 000019c1  getPidof                      
 00002473  getPinValue                   
 00002529  getPortValue                  
 00001697  getPsData                     
-000025b9  getR0FromPSP                  
-000025c7  getR1FromPSP                  
-0000347d  getRegionAddress              
-000025d5  getSVCNumber                  
-00002c49  getTime                       
-00003895  getcUart0                     
-0000300d  getsUart0                     
+00002c95  getR0FromPSP                  
+00002ca3  getR1FromPSP                  
+000037ad  getRegionAddress              
+00002cb1  getSVCNumber                  
+000041b3  getSolenoidState              
+00003325  getTime                       
+00003bc5  getcUart0                     
+0000333d  getsUart0                     
+00002861  goHome                        
+00002985  goHomePlusOne                 
 000013e3  hardFaultIsr                  
 2000052c  heap                          
-000027ed  hexToInt                      
+00002ec9  hexToInt                      
 00001a09  idle                          
 00001a57  idle2                         
 00001c7f  important                     
 000014b1  initHw                        
 0000026d  initRtos                      
-00003f8d  initSystemClockTo40Mhz        
+00004175  initSolenoidHw                
+00004309  initSystemClockTo40Mhz        
 0000160b  initTimer1                    
-00002d9b  initTurningMechanismThreadHw  
-0000378d  initUart0                     
-0000358d  initializePwm                 
-00002b71  intToString                   
+000026f3  initTurningMechanismThreadHw  
+00003abd  initUart0                     
+000038bd  initializePwm                 
+0000324d  intToString                   
 00001871  ipcs                          
-000030a1  isAlpha                       
-00003203  isCommand                     
-000030d3  isNum                         
-000038ad  kbhitUart0                    
+000033d1  isAlpha                       
+00003533  isCommand                     
+00003403  isNum                         
+00003bdd  kbhitUart0                    
 00001999  killPid                       
-20007c0b  ledDataReceivedFlag           
-000036f7  ledThread                     
-20007c09  ledThreadData                 
+20007c0e  ledDataReceivedFlag           
+00003a27  ledThread                     
+20007c0c  ledThreadData                 
 00001aaf  lengthyFn                     
 00001cd1  main                          
-00003cab  memcpy                        
-00002e09  microStep                     
+00003fdb  memcpy                        
+00002761  microStep                     
+000027b1  motorIsOn                     
+20007c02  motorOnFlag                   
+00002a3d  moveMotor                     
 0000129d  mpuFaultIsr                   
-0000292d  myAtoi                        
+00003009  myAtoi                        
 00001a39  oneshot                       
-000030f5  parseFields                   
+00003425  parseFields                   
 00001a73  partOfLengthyFn               
 00000a99  pendSvIsr                     
 000019cf  pidof                         
-00003d89  popR4ToR11FromPsp             
-00003f1f  post                          
+000040b9  popR4ToR11FromPsp             
+0000429b  post                          
 00001b01  postSemaphore                 
 000019a5  preempt                       
 20000531  preemptionOn                  
-00002653  printByteHex                  
-00002771  printHex                      
-00002a97  printNumberPercentage         
-000025f7  printState                    
-000026e1  printTwoBytesHex              
+00002d2f  printByteHex                  
+00002e4d  printHex                      
+00003173  printNumberPercentage         
+00002cd3  printState                    
+00002dbd  printTwoBytesHex              
 20000320  priorityIndex                 
 20000530  priorityOn                    
 20000318  priorityStartIndices          
 000019fd  proc_name                     
 200002e8  processTimes                  
 00001755  ps                            
-00003dcb  pushPSP                       
-00003d47  pushR4ToR11ToPsp              
-0000384d  putcUart0                     
-00003869  putsUart0                     
-00002c2d  reStartTimer1                 
+000040fb  pushPSP                       
+00004077  pushR4ToR11ToPsp              
+00003b7d  putcUart0                     
+00003b99  putsUart0                     
+00003309  reStartTimer1                 
 00001b4f  readKeys                      
 00001567  readPbs                       
 000016a5  reboot                        
@@ -323,49 +338,55 @@ ffffffff  binit
 00001f83  selectPinOpenDrainOutput      
 00001f35  selectPinPushPullOutput       
 20000270  semaphores                    
-20007c05  sendLEDDataFlag               
-20007c06  sendTurnMechDataFlag          
-20007c04  sendUartFlag                  
-000033a3  setASPBit                     
-0000340f  setBaseRegion                 
-00002e3f  setDirection                  
-00003425  setFlashRegion                
-00003389  setPSP                        
+20007c0a  sendLEDDataFlag               
+20007c0b  sendTurnMechDataFlag          
+20007c09  sendUartFlag                  
+000036d3  setASPBit                     
+0000373f  setBaseRegion                 
+0000283d  setDirection                  
+00003755  setFlashRegion                
+000036b9  setPSP                        
 00002189  setPinAuxFunction             
 0000206f  setPinCommitControl           
 0000244d  setPinValue                   
 000024a5  setPortValue                  
-00003683  setPwmDutyCycle               
-0000343b  setSRAMRegion                 
-000034c9  setSrd                        
-00002c61  setStepFormat                 
-000033b5  setTMPLBit                    
+000039b3  setPwmDutyCycle               
+0000376b  setSRAMRegion                 
+000037f9  setSrd                        
+000025b9  setStepFormat                 
+000036e5  setTMPLBit                    
 000008a9  setThreadPriority             
-00003821  setUart0BaudRate              
+00003b51  setUart0BaudRate              
 00001ca3  shell                         
-00003309  shellFunction                 
-00003f05  sleep                         
+00003639  shellFunction                 
+00004281  sleep                         
+20007c0f  solenoidFlag                  
 000008f9  startRtos                     
-00002835  stringHexToInteger            
-00002a01  stringsEqual                  
+00002f11  stringHexToInteger            
+000030dd  stringsEqual                  
 00000c21  svCallIsr                     
 00000971  systickIsr                    
 20000529  taskCount                     
 20000528  taskCurrent                   
 20000000  tcb                           
 20000534  totalProcessTime              
-000033f7  triggerPENDSVIsrCall          
-20007c00  turnMecData                   
-20007c07  turnMechDataReceivedFlag      
-00002e5f  turningMechanism              
-00003a0f  uartCommunication             
-0000390d  uartReceiveInput              
-000039ad  uartSendOutput                
+00003727  triggerPENDSVIsrCall          
+00002abf  turn                          
+20007c05  turnMecData                   
+20007c00  turnMechDataReceivedFlag      
+000027db  turnOffMotor                  
+000027c7  turnOnMotor                   
+20007c04  turningMechOnFlag             
+00002bcd  turningMechanism              
+00002797  turningMechanismIsOn          
+00003d3f  uartCommunication             
+00003c3d  uartReceiveInput              
+00003cdd  uartSendOutput                
 00001c4f  uncooperative                 
 0000147f  usageFaultIsr                 
-00003f11  wait                          
-00003f2d  waitMicrosecond               
-00003f01  yield                         
+0000428d  wait                          
+000042a9  waitMicrosecond               
+0000427d  yield                         
 
 
 GLOBAL SYMBOLS: SORTED BY Symbol Address 
@@ -443,93 +464,107 @@ address   name
 00002473  getPinValue                   
 000024a5  setPortValue                  
 00002529  getPortValue                  
-000025b9  getR0FromPSP                  
-000025c7  getR1FromPSP                  
-000025d5  getSVCNumber                  
-000025f7  printState                    
-00002653  printByteHex                  
-000026e1  printTwoBytesHex              
-00002771  printHex                      
-000027ed  hexToInt                      
-00002835  stringHexToInteger            
-0000292d  myAtoi                        
-00002a01  stringsEqual                  
-00002a97  printNumberPercentage         
-00002b71  intToString                   
-00002c2d  reStartTimer1                 
-00002c49  getTime                       
-00002c61  setStepFormat                 
-00002d9b  initTurningMechanismThreadHw  
-00002e09  microStep                     
-00002e3f  setDirection                  
-00002e5f  turningMechanism              
-0000300d  getsUart0                     
-000030a1  isAlpha                       
-000030d3  isNum                         
-000030f5  parseFields                   
-00003203  isCommand                     
-0000326f  getFieldString                
-000032a1  getFieldInteger               
-00003309  shellFunction                 
-00003389  setPSP                        
-00003397  getPSP                        
-0000339d  getMSP                        
-000033a3  setASPBit                     
-000033b5  setTMPLBit                    
-000033c7  enableMPUIsr                  
-000033d3  enableBusFaultIsr             
-000033df  enableUsageFaultIsr           
-000033eb  clearMPUFaultBit              
-000033f7  triggerPENDSVIsrCall          
-00003403  enableMPU                     
-0000340f  setBaseRegion                 
-00003425  setFlashRegion                
-0000343b  setSRAMRegion                 
-0000347d  getRegionAddress              
-000034c9  setSrd                        
-0000351d  disableSubRegion              
-0000358d  initializePwm                 
-00003683  setPwmDutyCycle               
-000036f7  ledThread                     
-0000378d  initUart0                     
-00003821  setUart0BaudRate              
-0000384d  putcUart0                     
-00003869  putsUart0                     
-00003895  getcUart0                     
-000038ad  kbhitUart0                    
-0000390d  uartReceiveInput              
-000039ad  uartSendOutput                
-00003a0f  uartCommunication             
-00003a79  __aeabi_ddiv                  
-00003baf  __aeabi_dmul                  
-00003cab  __aeabi_memcpy                
-00003cab  __aeabi_memcpy4               
-00003cab  __aeabi_memcpy8               
-00003cab  memcpy                        
-00003d47  pushR4ToR11ToPsp              
-00003d89  popR4ToR11FromPsp             
-00003dcb  pushPSP                       
-00003ddb  __TI_decompress_lzss          
-00003e45  __TI_auto_init_nobinit_nopinit
-00003e89  __aeabi_d2uiz                 
-00003ecd  _c_int00_noargs               
-00003f01  yield                         
-00003f05  sleep                         
-00003f11  wait                          
-00003f1f  post                          
-00003f2d  waitMicrosecond               
-00003f51  __aeabi_ui2d                  
-00003f71  __TI_zero_init_nomemset       
-00003f8d  initSystemClockTo40Mhz        
-00003f9d  __TI_decompress_none          
-00003fab  ResetISR                      
-00003fb7  _system_pre_init              
-00003fbb  C$$EXIT                       
-00003fbb  abort                         
-00004008  __TI_Handler_Table_Base       
-00004014  __TI_Handler_Table_Limit      
-00004028  __TI_CINIT_Base               
-00004040  __TI_CINIT_Limit              
+000025b9  setStepFormat                 
+000026f3  initTurningMechanismThreadHw  
+00002761  microStep                     
+00002797  turningMechanismIsOn          
+0000279d  changeTurningMechanismOnFlag  
+000027b1  motorIsOn                     
+000027c7  turnOnMotor                   
+000027db  turnOffMotor                  
+000027ef  checkCurrentAngle             
+0000283d  setDirection                  
+00002861  goHome                        
+00002985  goHomePlusOne                 
+00002a3d  moveMotor                     
+00002abf  turn                          
+00002bcd  turningMechanism              
+00002c95  getR0FromPSP                  
+00002ca3  getR1FromPSP                  
+00002cb1  getSVCNumber                  
+00002cd3  printState                    
+00002d2f  printByteHex                  
+00002dbd  printTwoBytesHex              
+00002e4d  printHex                      
+00002ec9  hexToInt                      
+00002f11  stringHexToInteger            
+00003009  myAtoi                        
+000030dd  stringsEqual                  
+00003173  printNumberPercentage         
+0000324d  intToString                   
+00003309  reStartTimer1                 
+00003325  getTime                       
+0000333d  getsUart0                     
+000033d1  isAlpha                       
+00003403  isNum                         
+00003425  parseFields                   
+00003533  isCommand                     
+0000359f  getFieldString                
+000035d1  getFieldInteger               
+00003639  shellFunction                 
+000036b9  setPSP                        
+000036c7  getPSP                        
+000036cd  getMSP                        
+000036d3  setASPBit                     
+000036e5  setTMPLBit                    
+000036f7  enableMPUIsr                  
+00003703  enableBusFaultIsr             
+0000370f  enableUsageFaultIsr           
+0000371b  clearMPUFaultBit              
+00003727  triggerPENDSVIsrCall          
+00003733  enableMPU                     
+0000373f  setBaseRegion                 
+00003755  setFlashRegion                
+0000376b  setSRAMRegion                 
+000037ad  getRegionAddress              
+000037f9  setSrd                        
+0000384d  disableSubRegion              
+000038bd  initializePwm                 
+000039b3  setPwmDutyCycle               
+00003a27  ledThread                     
+00003abd  initUart0                     
+00003b51  setUart0BaudRate              
+00003b7d  putcUart0                     
+00003b99  putsUart0                     
+00003bc5  getcUart0                     
+00003bdd  kbhitUart0                    
+00003c3d  uartReceiveInput              
+00003cdd  uartSendOutput                
+00003d3f  uartCommunication             
+00003da9  __aeabi_ddiv                  
+00003edf  __aeabi_dmul                  
+00003fdb  __aeabi_memcpy                
+00003fdb  __aeabi_memcpy4               
+00003fdb  __aeabi_memcpy8               
+00003fdb  memcpy                        
+00004077  pushR4ToR11ToPsp              
+000040b9  popR4ToR11FromPsp             
+000040fb  pushPSP                       
+0000410b  __TI_decompress_lzss          
+00004175  initSolenoidHw                
+0000418b  engageSolenoid                
+0000419f  disengageSolenoid             
+000041b3  getSolenoidState              
+000041c1  __TI_auto_init_nobinit_nopinit
+00004205  __aeabi_d2uiz                 
+00004249  _c_int00_noargs               
+0000427d  yield                         
+00004281  sleep                         
+0000428d  wait                          
+0000429b  post                          
+000042a9  waitMicrosecond               
+000042cd  __aeabi_ui2d                  
+000042ed  __TI_zero_init_nomemset       
+00004309  initSystemClockTo40Mhz        
+00004319  __TI_decompress_none          
+00004327  ResetISR                      
+00004333  _system_pre_init              
+00004337  C$$EXIT                       
+00004337  abort                         
+00004388  __TI_Handler_Table_Base       
+00004394  __TI_Handler_Table_Limit      
+000043a8  __TI_CINIT_Base               
+000043c0  __TI_CINIT_Limit              
 20000000  __start___llvm_prf_cnts       
 20000000  __stop___llvm_prf_cnts        
 20000000  tcb                           
@@ -546,14 +581,18 @@ address   name
 20000530  priorityOn                    
 20000531  preemptionOn                  
 20000534  totalProcessTime              
-20007c00  turnMecData                   
-20007c04  sendUartFlag                  
-20007c05  sendLEDDataFlag               
-20007c06  sendTurnMechDataFlag          
-20007c07  turnMechDataReceivedFlag      
-20007c08  currentAngle                  
-20007c09  ledThreadData                 
-20007c0b  ledDataReceivedFlag           
+20007c00  turnMechDataReceivedFlag      
+20007c01  currentAngle                  
+20007c02  motorOnFlag                   
+20007c03  angleOffset                   
+20007c04  turningMechOnFlag             
+20007c05  turnMecData                   
+20007c09  sendUartFlag                  
+20007c0a  sendLEDDataFlag               
+20007c0b  sendTurnMechDataFlag          
+20007c0c  ledThreadData                 
+20007c0e  ledDataReceivedFlag           
+20007c0f  solenoidFlag                  
 ffffffff  __TI_pprof_out_hndl           
 ffffffff  __TI_prof_data_size           
 ffffffff  __TI_prof_data_start          
@@ -563,4 +602,4 @@ ffffffff  binit
 UNDEFED   __mpu_init                    
 UNDEFED   _system_post_cinit            
 
-[190 symbols]
+[208 symbols]
